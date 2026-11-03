@@ -1,0 +1,7 @@
+{
+    "services": [
+        {"name": "Google", "url": "https://www.google.com", "severity": "HIGH"},
+        {"name": "GitHub", "url": "https://github.com", "severity": "MEDIUM"},
+        {"name": "Demo Broken Service", "url": "http://localhost:9999", "severity": "CRITICAL"}
+    ]
+}

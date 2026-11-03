@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Service Health Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Service Health Dashboard</h1>
+      <div class="sub">Last updated: <span id="updated">...</span>
+        <span id="connection" class="conn">connecting</span></div>
+    </div>
+    <div class="actions">
+      <button id="themeBtn" class="btn ghost" title="Switch light / dark mode">Dark mode</button>
+      <button id="runBtn" class="btn primary">Run checks now</button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner">Loading...</div>
+
+  <section class="kpis">
+    <div class="kpi good"><div class="num" id="kpiUp">-</div><div class="label">Services UP</div></div>
+    <div class="kpi bad"><div class="num" id="kpiDown">-</div><div class="label">Services DOWN</div></div>
+    <div class="kpi warn"><div class="num" id="kpiOpen">-</div><div class="label">Open incidents</div></div>
+    <div class="kpi"><div class="num" id="kpiUptime">-</div><div class="label">Average uptime</div></div>
+    <div class="kpi"><div class="num" id="kpiAvg">-</div><div class="label">Avg response</div></div>
+  </section>
+
+  <h2 class="section-title">Services</h2>
+  <section id="services" class="services"></section>
+
+  <section class="two-col">
+    <div class="panel">
+      <h2>Open incidents by severity</h2>
+      <div class="chart-box"><canvas id="severityChart"></canvas></div>
+      <p id="severityEmpty" class="empty" style="display:none">No open incidents</p>
+    </div>
+    <div class="panel">
+      <h2>Log summary</h2>
+      <div class="chart-box"><canvas id="logChart"></canvas></div>
+      <p id="logEmpty" class="empty" style="display:none">No log data</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Incidents</h2>
+    <div class="toolbar">
+      <div class="filters" id="statusFilters">
+        <button class="active" data-status="all">All</button>
+        <button data-status="open">Open</button>
+        <button data-status="acknowledged">Acknowledged</button>
+        <button data-status="resolved">Resolved</button>
+      </div>
+      <select id="severityFilter" aria-label="Filter by severity">
+        <option value="all">All severities</option>
+        <option value="CRITICAL">Critical</option>
+        <option value="HIGH">High</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LOW">Low</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Service</th><th>Severity</th><th>Description</th>
+              <th>Status</th><th>Created</th><th>Resolved</th><th>Action</th></tr>
+        </thead>
+        <tbody id="incidentRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Page refreshes every 5 seconds. Services are checked automatically every
+    <span id="interval">60</span> seconds.
+  </footer>
+
+  <script src="{{ url_for('static', filename='chart.umd.js') }}"></script>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
