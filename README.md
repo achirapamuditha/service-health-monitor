@@ -119,5 +119,5 @@ Severity options: LOW, MEDIUM, HIGH, CRITICAL.
 
 ## Author
 
-Pamuditha (Sparrow) - HND in Software Engineering, NIBM
+Achira Pamuditha - HND in Software Engineering, NIBM
 GitHub: https://github.com/achirapamuditha
